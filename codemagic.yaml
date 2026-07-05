@@ -5,21 +5,18 @@ workflows:
     environment:
       java: 17
     scripts:
-      - name: Set up Gradle
+      - name: Install Gradle 8.4
         script: |
-          mkdir -p gradle/wrapper
-          curl -L "https://github.com/gradle/gradle/raw/v8.4.0/gradle/wrapper/gradle-wrapper.jar" \
-            -o gradle/wrapper/gradle-wrapper.jar
-          chmod +x gradlew
+          brew install gradle@8 || true
+          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
+          sudo unzip -q -d /opt/gradle gradle-8.4-bin.zip
+          echo 'export PATH=/opt/gradle/gradle-8.4/bin:$PATH' >> $CM_BUILD_DIR/../gradle_path.sh
+          export PATH=/opt/gradle/gradle-8.4/bin:$PATH
+          gradle --version
       - name: Build Debug APK
         script: |
-          ./gradlew assembleDebug
+          export PATH=/opt/gradle/gradle-8.4/bin:$PATH
+          gradle assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
-    publishing:
-      email:
-        recipients:
-          - owner@kayansoft.com
-        notify:
-          success: true
-          failure: true
+
