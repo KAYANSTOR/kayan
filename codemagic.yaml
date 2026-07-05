@@ -5,18 +5,15 @@ workflows:
     environment:
       java: 17
     scripts:
-      - name: Install Gradle 8.4
+      - name: Install Gradle 8.7
         script: |
-          brew install gradle@8 || true
-          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
-          sudo unzip -q -d /opt/gradle gradle-8.4-bin.zip
-          echo 'export PATH=/opt/gradle/gradle-8.4/bin:$PATH' >> $CM_BUILD_DIR/../gradle_path.sh
-          export PATH=/opt/gradle/gradle-8.4/bin:$PATH
+          wget -q https://services.gradle.org/distributions/gradle-8.7-bin.zip
+          sudo unzip -q -d /opt/gradle gradle-8.7-bin.zip
+          export PATH=/opt/gradle/gradle-8.7/bin:$PATH
           gradle --version
       - name: Build Debug APK
         script: |
-          export PATH=/opt/gradle/gradle-8.4/bin:$PATH
+          export PATH=/opt/gradle/gradle-8.7/bin:$PATH
           gradle assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
-
