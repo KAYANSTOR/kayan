@@ -13,9 +13,8 @@ class SyncManager(private val context: Context) {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var syncJob: Job? = null
 
-    // Connected to Railway Production Environment
-    // Replace with your actual Railway backend URL if different
-    private val wsClient = KurotekWebSocketClient("wss://kurotek-backend-production.up.railway.app/ws") { message ->
+    // Connected to Render Production Environment
+    private val wsClient = KurotekWebSocketClient("wss://kayan-uzs5.onrender.com/ws") { message ->
         handleIncomingMessage(message)
     }
 
