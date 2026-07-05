@@ -15,9 +15,6 @@ workflows:
         script: |
           export PATH=/opt/gradle/gradle-8.7/bin:$PATH
           cd mobile
-          echo "android.useAndroidX=true" >> gradle.properties
-          echo "android.enableJetifier=true" >> gradle.properties
-          echo "android.suppressUnsupportedCompileSdk=35" >> gradle.properties
-          gradle assembleDebug
+          gradle assembleDebug -Pandroid.useAndroidX=true -Pandroid.enableJetifier=true --no-configuration-cache --stacktrace
     artifacts:
       - mobile/app/build/outputs/apk/debug/app-debug.apk
