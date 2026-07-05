@@ -88,6 +88,14 @@ model Tenant {
   walletConfigs    WalletConfig[]
   smsTemplates     SmsTemplate[]
 
+  // Distributor Relations
+  distributorPricings  DistributorPricing[]
+  distributorCustomers DistributorCustomer[]
+  distributorSales     DistributorSale[]
+  distributorPayments  DistributorPayment[]
+  distributorExpenses  DistributorExpense[]
+  distributorCapitals  DistributorCapital[]
+
   @@map("tenants")
 }
 
